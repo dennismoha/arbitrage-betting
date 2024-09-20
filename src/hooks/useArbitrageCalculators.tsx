@@ -39,7 +39,7 @@ const useArbitrageCalculator = () => {
     if (odds.length === 0) return;
 
     // Calculate arbitrage percentage
-    console.log('-------- in the calculate arbitrage -----> ', odds)
+   
     const arbPercentage = odds.reduce((acc, { odds }) => acc + (1 / odds), 0);
     console.log('arbPercentage ', arbPercentage)
 
