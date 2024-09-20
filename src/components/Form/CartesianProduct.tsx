@@ -1,7 +1,5 @@
 import { MatchInterface } from "../../interfaces";
 
-
-
 const CartesianProduct: React.FC<MatchInterface> = ({match})  => {
   // Sample data for N matches with outcomes and odds
 

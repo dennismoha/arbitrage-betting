@@ -1,3 +1,13 @@
+#
+
+### arbitrage betting sites
+
+[webscrapper](https://webscraper.io/blog/sports-arbitrage-betting)
+
+### main formula:
+- main formula used here is the `cartesian product`. [link](https://byjus.com/maths/cartesian-products-of-sets/)
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
