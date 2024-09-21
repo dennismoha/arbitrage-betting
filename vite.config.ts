@@ -6,7 +6,10 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: [
-      { find: '@inter', replacement: '/src/interfaces' },     
+      {find:'@components', replacement: '/src/components'},
+      {find: '@slice', replacement: '/src/feature'},
+      {find: '@hooks', replacement: '/src/hooks'},
+      {find: "@store", replacement:'/src/store'}   
     ],
   },
 })

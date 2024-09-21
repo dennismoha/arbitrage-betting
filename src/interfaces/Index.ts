@@ -12,3 +12,14 @@ export type Match = {
 export interface MatchInterface {
   match: Match[];
 }
+
+type ArbitrageObject = {
+  betId : string;
+  odds: number
+}
+
+export interface ArbitrageInterface {
+  bets: ArbitrageObject[];
+  totalStake: number
+
+}

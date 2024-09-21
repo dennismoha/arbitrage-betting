@@ -1,80 +1,54 @@
-import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import CartesianProduct from "../components/Form/CartesianProduct";
-import { Match } from "./interfaces/index";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import CartesianProduct from "@components/Form/CartesianProduct";
+import {
+  addMatch,
+  removeMatch,
+  clearMatches,
+  handleChange,
+  addOutcome,
+  removeOutcome,
+} from "@slice/cartesian/Cartesian-slice"; // Adjust the path accordingly
+
+
+
+import { RootState } from "@store/store"; // Adjust the path accordingly
 
 const Cartesian = () => {
-  const [odds, setOdds] = useState<OddsInput>({ outcomeA: 0, outcomeB: 0, outcomeC: 0, totalStake: 0 });
-  // Initial match object
-  const matchObject: Match = {
-    team1: "",
-    team2: "",
-    outcomes: [{ result: "", odds: "", outComeId: uuidv4() }],
-    matchId: uuidv4(),
-  };
-
-  // State to hold matches
-  const [matches, setMatches] = useState([matchObject]);
+  const dispatch = useDispatch();
+  const matches = useSelector((state: RootState) => state.CartesianReducer.matches);
+  console.log('matches are ',  useSelector((state: RootState) => state.CartesianReducer.matches))
 
   // Handle form input changes
-  const handleChange = (
+  const handleInputChange = (
     matchIndex: number,
     outcomeIndex: number | null,
     field: string,
     value: string
   ) => {
-    const newMatches = [...matches];
-    if (field === "team1" || field === "team2") {
-      newMatches[matchIndex][field] = value;
-    } else if (outcomeIndex !== null) {
-      //@ts-expect-error err
-      newMatches[matchIndex].outcomes[outcomeIndex][field] = value;
-    }
-    setMatches(newMatches);
+    dispatch(handleChange({ matchIndex, outcomeIndex, field, value }));
   };
 
-  // Add a new match
-  const addMatch = () => {
-    setMatches([...matches, { ...matchObject, matchId: uuidv4() }]);
+  const handleAddMatch = () => {
+    dispatch(addMatch());
   };
 
-  const removeMatch = (matchIndex: number) => {    
-    setMatches((prevItems) => {
-      // Create a copy of the current items array
-      const newItems = [...prevItems];
-      // Remove the item at the specified index
-      newItems.splice(matchIndex, 1);
-      // Return the updated array
-      return newItems;
-    });
+  const handleRemoveMatch = (matchIndex: number) => {
+    dispatch(removeMatch(matchIndex));
   };
 
-  // Clear all matches except the initial match
-  const clearMatches = () => {
-    setMatches([matchObject]);
+  const handleAddOutcome = (matchIndex: number) => {
+    dispatch(addOutcome(matchIndex));
   };
 
-  // Add a new outcome to a match
-  const addOutcome = (matchIndex: number) => {
-    const newMatches = [...matches];
-    newMatches[matchIndex].outcomes.push({
-      result: "",
-      odds: "",
-      outComeId: uuidv4(),
-    });
-    setMatches(newMatches);
+  const handleRemoveOutcome = (matchIndex: number, outComeId: string) => {
+    dispatch(removeOutcome({ matchIndex, outComeId }));
   };
 
-  // Remove an outcome from a match
-  const removeOutcome = (matchIndex: number, outComeId: string) => {
-    const newMatches = [...matches];
-    newMatches[matchIndex].outcomes = newMatches[matchIndex].outcomes.filter(
-      (outcome) => outcome.outComeId !== outComeId
-    );
-    setMatches(newMatches);
+  const handleClearMatches = () => {
+    dispatch(clearMatches());
   };
 
-  // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form Data:", matches);
@@ -97,13 +71,13 @@ const Cartesian = () => {
             {matches.map((match, matchIndex) => (
               <div key={match.matchId} style={{ marginBottom: "20px" }}>
                 <h3>Match {matchIndex + 1}</h3>
-               
+
                 <input
                   type="text"
                   placeholder="Team 1"
                   value={match.team1}
                   onChange={(e) =>
-                    handleChange(matchIndex, null, "team1", e.target.value)
+                    handleInputChange(matchIndex, null, "team1", e.target.value)
                   }
                 />
                 <span> vs </span>
@@ -112,10 +86,19 @@ const Cartesian = () => {
                   placeholder="Team 2"
                   value={match.team2}
                   onChange={(e) =>
-                    handleChange(matchIndex, null, "team2", e.target.value)
+                    handleInputChange(matchIndex, null, "team2", e.target.value)
                   }
                 />
-                 <span   style={{marginLeft:"10px", marginRight:"10px", cursor: 'pointer'}} onClick={()=> removeMatch(matchIndex)}>X</span>
+                <span
+                  style={{
+                    marginLeft: "10px",
+                    marginRight: "10px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleRemoveMatch(matchIndex)}
+                >
+                  X
+                </span>
 
                 <h3>Outcomes</h3>
                 {match.outcomes.map((outcome, outcomeIndex) => (
@@ -126,7 +109,7 @@ const Cartesian = () => {
                       value={outcome.result}
                       maxLength={2}
                       onChange={(e) =>
-                        handleChange(
+                        handleInputChange(
                           matchIndex,
                           outcomeIndex,
                           "result",
@@ -141,7 +124,7 @@ const Cartesian = () => {
                       value={outcome.odds}
                       maxLength={4}
                       onChange={(e) =>
-                        handleChange(
+                        handleInputChange(
                           matchIndex,
                           outcomeIndex,
                           "odds",
@@ -150,28 +133,35 @@ const Cartesian = () => {
                       }
                     />
                     <span
-                      style={{marginLeft:"10px", marginRight:"10px", cursor: 'pointer'}}
+                      style={{
+                        marginLeft: "10px",
+                        marginRight: "10px",
+                        cursor: "pointer",
+                      }}
                       onClick={() =>
-                        removeOutcome(matchIndex, outcome.outComeId)
+                        handleRemoveOutcome(matchIndex, outcome.outComeId)
                       }
                     >
-                     x
+                      x
                     </span>
                   </div>
                 ))}
-                <button type="button" onClick={() => addOutcome(matchIndex)}>
+                <button
+                  type="button"
+                  onClick={() => handleAddOutcome(matchIndex)}
+                >
                   Add Outcome
                 </button>
               </div>
             ))}
 
-            <button type="button" onClick={addMatch}>
+            <button type="button" onClick={handleAddMatch}>
               Add Match
             </button>
 
             <button type="submit">Submit</button>
           </form>
-          <button onClick={clearMatches}>Clear Matches</button>
+          <button onClick={handleClearMatches}>Clear Matches</button>
         </div>
 
         <div>

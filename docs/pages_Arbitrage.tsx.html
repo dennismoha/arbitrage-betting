@@ -1,4 +1,32 @@
-import  { useState } from "react"; 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/Arbitrage.tsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/Arbitrage.tsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import  { useState } from "react"; 
 import { v4 as uuidv4 } from "uuid";
 import useArbitrageCalculator from "@hooks/useArbitrageCalculators";
 
@@ -76,10 +104,10 @@ const Arbitrage = () => {
   };
 
   return (
-    <>
-      <h1>Arbitrage Betting Form</h1>
-      <hr />
-      <div
+    &lt;>
+      &lt;h1>Arbitrage Betting Form&lt;/h1>
+      &lt;hr />
+      &lt;div
         style={{
           display: "flex",
           flexDirection: "row",
@@ -87,13 +115,13 @@ const Arbitrage = () => {
         }}
       >
         {/* Betting Form Section */}
-        <div>
-          <form onSubmit={handleSubmit}>
+        &lt;div>
+          &lt;form onSubmit={handleSubmit}>
             {/* Render each bet */}
             {data.bets.map((bet, betIndex) => (
-              <div key={bet.betId} style={{ marginBottom: "20px" }}>
-                <span style={{ marginRight: "10px" }}>Bet {betIndex + 1}:</span>
-                <input
+              &lt;div key={bet.betId} style={{ marginBottom: "20px" }}>
+                &lt;span style={{ marginRight: "10px" }}>Bet {betIndex + 1}:&lt;/span>
+                &lt;input
                   type="number"
                   step="0.01"
                   value={bet.odds == 0 ? '': bet.odds}
@@ -103,13 +131,13 @@ const Arbitrage = () => {
                   placeholder="Enter odds"
                   required
                 />
-              </div>
+              &lt;/div>
             ))}
 
             {/* Input for Total Stake */}
-            <div style={{ marginBottom: "20px" }}>
-              <span style={{ marginRight: "10px" }}>Total Stake:</span>
-              <input
+            &lt;div style={{ marginBottom: "20px" }}>
+              &lt;span style={{ marginRight: "10px" }}>Total Stake:&lt;/span>
+              &lt;input
                 type="number"
                 step="0.01"
                 value={data.totalStake === 0 ? "" : data.totalStake}
@@ -119,46 +147,69 @@ const Arbitrage = () => {
                 placeholder="Enter total stake"
                 required
               />
-            </div>
+            &lt;/div>
 
             {/* Action Buttons */}
-            <div>
-              <button type="button" onClick={addBet} style={{ marginRight: "10px" }}>
+            &lt;div>
+              &lt;button type="button" onClick={addBet} style={{ marginRight: "10px" }}>
                 Add Bet
-              </button>
-              <button type="submit" style={{ marginRight: "10px" }}>
+              &lt;/button>
+              &lt;button type="submit" style={{ marginRight: "10px" }}>
                 Submit
-              </button>
-              <button type="button" onClick={clearBets}>
+              &lt;/button>
+              &lt;button type="button" onClick={clearBets}>
                 Clear Bets
-              </button>
-            </div>
-          </form>
-        </div>
+              &lt;/button>
+            &lt;/div>
+          &lt;/form>
+        &lt;/div>
 
         {/* Results Section */}
-        <div>
-          {results && (
-            <div>
-              <h2>Results</h2>
-              <p>Arbitrage Percentage: {results.arbPercentage.toFixed(3)}</p>
-              {results.arbPercentage < 1 ? (
-                <>
+        &lt;div>
+          {results &amp;&amp; (
+            &lt;div>
+              &lt;h2>Results&lt;/h2>
+              &lt;p>Arbitrage Percentage: {results.arbPercentage.toFixed(3)}&lt;/p>
+              {results.arbPercentage &lt; 1 ? (
+                &lt;>
              
-                  <p>Stake for Outcome A: ${JSON.stringify(results)}</p>
-                  {/* <p>Stake for Outcome B: ${results.stake}</p>
-                  <p>Stake for Outcome C: ${results.stake}</p> */}
-                  {/* <p>Guaranteed Profit: ${results.profit.toFixed(2)}</p> */}
-                </>
+                  &lt;p>Stake for Outcome A: ${JSON.stringify(results)}&lt;/p>
+                  {/* &lt;p>Stake for Outcome B: ${results.stake}&lt;/p>
+                  &lt;p>Stake for Outcome C: ${results.stake}&lt;/p> */}
+                  {/* &lt;p>Guaranteed Profit: ${results.profit.toFixed(2)}&lt;/p> */}
+                &lt;/>
               ) : (
-                <p>No arbitrage opportunity.</p>
+                &lt;p>No arbitrage opportunity.&lt;/p>
               )}
-            </div>
+            &lt;/div>
           )}
-        </div>
-      </div>
-    </>
+        &lt;/div>
+      &lt;/div>
+    &lt;/>
   );
 };
 
 export default Arbitrage;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#CartesianProduct">CartesianProduct</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sat Sep 21 2024 12:30:35 GMT+0300 (East Africa Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,8 +1,13 @@
-import { MatchInterface } from "../../interfaces";
+import { MatchInterface } from "@interfaces/Index";
 
-const CartesianProduct: React.FC<MatchInterface> = ({match})  => {
-  // Sample data for N matches with outcomes and odds
-
+/**
+ * CartesianProduct component
+ * 
+ * @param {Object} props - The props object
+ * @param {MatchInterface} props.match - The match object to process
+ * @returns {React.ReactNode} - The rendered React component
+ */
+const CartesianProduct: React.FC<MatchInterface> = ({match}): React.ReactNode => {
 
   // Recursive function to compute the Cartesian product
   const cartesianProduct = (arr) => {

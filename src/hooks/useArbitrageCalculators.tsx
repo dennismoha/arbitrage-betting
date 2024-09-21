@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import {ArbitrageInterface} from '@interfaces/Index'
 
 type OddsType = {
   betId: string;
@@ -22,9 +23,10 @@ const useArbitrageCalculator = () => {
 
   useEffect(()=>{
     calculateArbitrage()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[odds, totalStake])
 
-  const setOddsHandler = (k: any)=>{
+  const setOddsHandler = (k: ArbitrageInterface)=>{
     console.log('incoming k', k)
     setOdds(k.bets)
     setTotalStake(k.totalStake)
@@ -39,6 +41,8 @@ const useArbitrageCalculator = () => {
     if (odds.length === 0) return;
 
     // Calculate arbitrage percentage
+
+    
    
     const arbPercentage = odds.reduce((acc, { odds }) => acc + (1 / odds), 0);
     console.log('arbPercentage ', arbPercentage)
@@ -60,6 +64,7 @@ const useArbitrageCalculator = () => {
 
     // Calculate total returns and profit
     console.log('oddddddddddddds are::: -----<>> ',  odds)
+    //@ts-expect-error this function not returning well
     const totalReturns = odds.reduce((acc, { betId, odds: odds }) => acc + (stakes[betId] * odds), 0);
     console.log('totttttttttttttttttal returns are ', totalReturns)
     const profit = totalReturns - totalStake;
