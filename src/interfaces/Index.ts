@@ -1,8 +1,11 @@
-type outcomeResult = {
+export type outcomeResult = {
   result: string;
   odds: string;
   outComeId: string;
 };
+
+export type FieldKey = keyof outcomeResult | 'team1' | 'team2';
+
 export type Match = {
   team1: string;
   team2: string;

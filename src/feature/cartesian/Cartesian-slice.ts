@@ -1,8 +1,9 @@
 // src/features/counter/cartesianSlice.ts
 
 import { createSlice, PayloadAction} from '@reduxjs/toolkit';
-import { Match } from "@interfaces/Index";
+import { Match,   FieldKey } from "@interfaces/Index";
 import { v4 as uuidv4 } from "uuid";
+
 
 
 
@@ -48,14 +49,14 @@ const CartesianSlice = createSlice({
       action: PayloadAction<{
         matchIndex: number;
         outcomeIndex: number | null;
-        field: string;
+        field:  FieldKey;
         value: string;
       }>
     ) => {
       const { matchIndex, outcomeIndex, field, value } = action.payload;
-      const match = state.matches[matchIndex];
+      const match: Match  = state.matches[matchIndex];
       if (field === 'team1' || field === 'team2') {
-        (match as any)[field] = value;
+        match[field] = value;
       } else if (outcomeIndex !== null) {
         match.outcomes[outcomeIndex][field] = value;
       }

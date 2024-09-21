@@ -9,6 +9,7 @@ import {
   addOutcome,
   removeOutcome,
 } from "@slice/cartesian/Cartesian-slice"; // Adjust the path accordingly
+import { FieldKey } from "@interfaces/Index";
 
 
 
@@ -23,7 +24,7 @@ const Cartesian = () => {
   const handleInputChange = (
     matchIndex: number,
     outcomeIndex: number | null,
-    field: string,
+    field: FieldKey,
     value: string
   ) => {
     dispatch(handleChange({ matchIndex, outcomeIndex, field, value }));

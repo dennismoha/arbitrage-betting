@@ -1,4 +1,5 @@
-import { MatchInterface } from "@interfaces/Index";
+import { MatchInterface, outcomeResult } from "@interfaces/Index";
+
 
 /**
  * CartesianProduct component
@@ -8,31 +9,38 @@ import { MatchInterface } from "@interfaces/Index";
  * @returns {React.ReactNode} - The rendered React component
  */
 const CartesianProduct: React.FC<MatchInterface> = ({match}): React.ReactNode => {
+/** Recursive function to compute the Cartesian product */
 
-  // Recursive function to compute the Cartesian product
-  const cartesianProduct = (arr) => {
-    // Base case: if there's only one set, return it as the product
-    if (arr.length === 1) return arr[0].map(item => [item]);
+  const cartesianProduct = (arr: outcomeResult[][]) :  outcomeResult[][]=> {    
+    /**  Base case: if there's only one set, return it don't find the product  */
+    
+    if (arr.length === 1) return arr[0].map(item => {
+      console.log('item is =======> ', item)
+      return [item]
+    });
 
     // Recursive step: take the first set and combine with the Cartesian product of the remaining sets
-    const restProduct = cartesianProduct(arr.slice(1));
-    console.log('array 0 is ', arr)
+    const restProduct: outcomeResult[][] = cartesianProduct(arr.slice(1));
+    console.log('rest product is~~~~~^^^^^^^^^^----> ', restProduct)
+    console.log('@@@@@@@ the final product is --------> ', arr[0].flatMap(firstItem => restProduct.map(combination => [firstItem, ...combination])))
+
     return arr[0].flatMap(firstItem => restProduct.map(combination => [firstItem, ...combination]));
   };
 
   // Function to generate combinations and calculate the odds multiplicant
   const getCombinationsWithOdds = () => {
     // Extract only the outcomes for each match
-    const outcomeArrays = match.map(match => match.outcomes);
+    const outcomeArrays: outcomeResult[][] = match.map(match => match.outcomes);
+    console.log('outcome array is ', outcomeArrays)
 
     // Compute the Cartesian product of all matches
-    const combinations = cartesianProduct(outcomeArrays);
+    const combinations  = cartesianProduct(outcomeArrays);
 
     // Calculate combined odds for each combination
     return combinations.map(combination => {
       console.log('combinations when returning are ', combinations)
       const combinedResult = combination.map(outcome => outcome.result).join(' & ');
-      const combinedOdds = combination.reduce((acc, outcome) => acc * outcome.odds, 1).toFixed(3);
+      const combinedOdds = combination.reduce((acc, outcome) => acc * Number(outcome.odds), 1).toFixed(3);
       return { result: combinedResult, odds: combinedOdds };
     });
   };
@@ -43,7 +51,7 @@ const CartesianProduct: React.FC<MatchInterface> = ({match}): React.ReactNode =>
       
       {match.map((match, index) => (
         <div key={index}>
-          <h2>{match.teams}</h2>
+          <h2>{match.team1} {match.team1 === "" || match.team2 ===" "? null: <><span>v</span></> } {match.team2}</h2>
           <ul>
             {match.outcomes.map((outcome, idx) => (
               <li key={idx}>
