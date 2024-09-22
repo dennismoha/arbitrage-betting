@@ -1,4 +1,5 @@
 import { MatchInterface, outcomeResult } from "@interfaces/Index";
+import { Typography, Box, Paper, List, ListItem, ListItemText, Divider } from '@mui/material';
 
 
 /**
@@ -46,31 +47,60 @@ const CartesianProduct: React.FC<MatchInterface> = ({match}): React.ReactNode =>
   };
 
   return (
-    <div>
-      <h1>Match Outcomes and Odds Combinations</h1>
-      
+    <Paper elevation={3} style={{ padding: '20px', margin: '20px' }}> 
+
       {match.map((match, index) => (
-        <div key={index}>
-          <h2>{match.team1} {match.team1 === "" || match.team2 ===" "? null: <><span>v</span></> } {match.team2}</h2>
-          <ul>
+        <Box key={index} sx={{ mb: 3 }}>
+          <Typography variant="h5">
+            {match.team1} {match.team1 === "" || match.team2 === "" ? null : <span>vs</span>} {match.team2}
+          </Typography>
+          <List>
             {match.outcomes.map((outcome, idx) => (
-              <li key={idx}>
-                {outcome.result} - Odds: {outcome.odds}
-              </li>
+              <ListItem key={idx}>
+                <ListItemText primary={`${outcome.result} - Odds: ${outcome.odds}`} />
+              </ListItem>
             ))}
-          </ul>
-        </div>
+          </List>
+          <Divider />
+        </Box>
       ))}
 
-      <h3>Combinations with Odds Multiplicant:</h3>
-      <ul>
+      <Typography variant="h6" gutterBottom>
+        Combinations with Odds Multiplicant:
+      </Typography>
+      <List>
         {getCombinationsWithOdds().map((combo, idx) => (
-          <li key={idx}>
-            {combo.result} - Combined Odds: {combo.odds}
-          </li>
+          <ListItem key={idx}>
+            <ListItemText primary={`${combo.result} - Combined Odds: ${combo.odds}`} />
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Paper>
+    // <div>
+    //   <h1>Match Outcomes and Odds Combinations</h1>
+      
+    //   {match.map((match, index) => (
+    //     <div key={index}>
+    //       <h2>{match.team1} {match.team1 === "" || match.team2 ===" "? null: <><span>v</span></> } {match.team2}</h2>
+    //       <ul>
+    //         {match.outcomes.map((outcome, idx) => (
+    //           <li key={idx}>
+    //             {outcome.result} - Odds: {outcome.odds}
+    //           </li>
+    //         ))}
+    //       </ul>
+    //     </div>
+    //   ))}
+
+    //   <h3>Combinations with Odds Multiplicant:</h3>
+    //   <ul>
+    //     {getCombinationsWithOdds().map((combo, idx) => (
+    //       <li key={idx}>
+    //         {combo.result} - Combined Odds: {combo.odds}
+    //       </li>
+    //     ))}
+    //   </ul>
+    // </div>
   );
 };
 
