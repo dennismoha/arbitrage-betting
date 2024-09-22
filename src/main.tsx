@@ -14,7 +14,7 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Container  fixed>
+        <Container>
           <RouterProvider router={AppRouter} />
         </Container>
       </PersistGate>
