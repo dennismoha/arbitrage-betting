@@ -6,11 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Arbitrage analysis">
     <meta name="robots" content="index, follow">
+    <link rel="manifest.json" href="/manifest.json"/>
     <!-- <link rel="canonical" href="https://example.com/page"> -->
     <title>Arbitrage prediction</title>
   </head>
   <body>
+    <noscript>You need javascript to run this app</noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+        if('serviceWorker' in navigator){
+          window.addEventListener('load', () =>{
+            navigator.serviceWorker.register('/serviceworker.js')
+              .then((reg) => console.log())
+              .catch((error) => console.log('service worker not registered'))
+          })
+        }
+    </script>
   </body>
 </html>
