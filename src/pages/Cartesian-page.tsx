@@ -28,10 +28,7 @@ const Cartesian = () => {
   const matches = useSelector(
     (state: RootState) => state.CartesianReducer.matches
   );
-  console.log(
-    "matches are ",
-    useSelector((state: RootState) => state.CartesianReducer.matches)
-  );
+ 
 
   // Handle form input changes
   const handleInputChange = (
@@ -65,7 +62,6 @@ const Cartesian = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Data:", matches);
     // You can send the matches data to an API or use it in your app
   };
 

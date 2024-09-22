@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import Container from '@mui/material/Container';
 
-// import App from "./App.tsx";
+
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import AppRouter from "./routes.tsx";

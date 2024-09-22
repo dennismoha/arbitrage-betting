@@ -26,3 +26,10 @@ export interface ArbitrageInterface {
   totalStake: number
 
 }
+
+
+export interface MyError {
+  statusText?: string;
+  message?: string;
+  // Add other fields as necessary
+}

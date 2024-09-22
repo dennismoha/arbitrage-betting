@@ -1,14 +1,8 @@
 import { useRouteError } from "react-router-dom";
-
-interface MyError {
-  statusText?: string;
-  message?: string;
-  // Add other fields as necessary
-}
+import { MyError } from "@interfaces/Index";
 
 export default function NotFound() {
-const error = useRouteError() as MyError;
-
+  const error = useRouteError() as MyError;
 
   return (
     <div id="error-page">

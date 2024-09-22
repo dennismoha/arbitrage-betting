@@ -78,8 +78,6 @@ const Arbitrage = () => {
    */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Submitting Bets:", data.bets);
-    console.log("Submitting Total Stake:", data.totalStake);
     setOddsHandler(data);
     // calculateArbitrage(); // Assuming this uses the updated state internally
   };
