@@ -59,6 +59,7 @@ const Arbitrage = () => {
     console.log('new odds is ', newOdds)
 
     if(!newOdds) {
+      //@ts-expect-error newodds cannot be a string
       newOdds = ''
     }
 
