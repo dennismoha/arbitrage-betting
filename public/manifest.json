@@ -16,7 +16,7 @@
     }
   ],
   "orientation": "any",
-  "display": "standalone",
+  "display": "Fullscreen",
   "dir": "auto",
   "lang": "en-US",
   "name": "ekeza-analysis",
