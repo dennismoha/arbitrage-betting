@@ -10,8 +10,9 @@ type OddsInput = OddsType[];
 
 type ArbitrageResults = {
   arbPercentage: number;
-  stakes: { [id: string]: number };
+  stakes: { [betId: string]: number };
   profit: number;
+  totalPayout?: number
 } | null;
 
 const useArbitrageCalculator = () => {
@@ -29,21 +30,23 @@ const useArbitrageCalculator = () => {
     setTotalStake(k.totalStake);
   };
 
-  const calculateArbitrage = () => {
+  const calculateArbitrage = () => {    
     if (odds.length === 0) return;
 
     // Calculate arbitrage percentage
 
     const arbPercentage = odds.reduce((acc, { odds }) => acc + 1 / odds, 0);
 
-    if (arbPercentage >= 1) {
-      setResults({
-        arbPercentage,
-        stakes: odds.reduce((acc, { betId }) => ({ ...acc, [betId]: 0 }), {}),
-        profit: 0,
-      });
-      return;
-    }
+    // if (arbPercentage >= 1) {
+    //   setResults({
+    //     arbPercentage,
+    //     stakes: odds.reduce((acc, { betId }) => ({ ...acc, [betId]: 0 }), {}),
+    //     profit: 0,
+    //   });
+    //   return;
+    // }
+   
+  
 
     // Calculate stakes for each outcome
     const stakes = odds.reduce((acc, { betId, odds: outcomeOdds }) => {
@@ -54,18 +57,22 @@ const useArbitrageCalculator = () => {
     // Calculate total returns and profit
 
     //@ts-expect-error this function not returning well
-    const totalReturns = odds.reduce((acc, { betId, odds: odds }) => acc + stakes[betId] * odds,
+    const totalReturns = odds.slice(0,1).reduce((acc, { betId, odds: odds }) => acc + stakes[betId] * odds,
       0
     );
 
-    const profit = (totalReturns - totalStake) / 2;
+    const profit = totalReturns - totalStake;
 
     setResults({
       arbPercentage,
       stakes,
       profit,
+      totalPayout: profit + totalStake
+      
     });
   };
+
+  console.log('results are ', results)
 
   // const updateOdds = (newOdds: OddsInput) => {
   //   setOdds(newOdds);
@@ -74,7 +81,7 @@ const useArbitrageCalculator = () => {
   return {
     totalStake,
     results,
-
+    setResults,
     setOddsHandler,
   };
 };

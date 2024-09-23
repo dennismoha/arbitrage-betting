@@ -17,7 +17,7 @@ import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import Link from "@mui/material/Link";
 
 const pages = [
-  { title: "Home", link: "/" },
+  
   { title: "Arbitrage", link: "/arbitrage" },
   { title: "Tips", link: "/rules" }
 ];

@@ -18,15 +18,17 @@ const Rules = () => {
 
               <Typography>
                 Double chance draws
+              </Typography>
                 <ul>
                   <li>1x vs 1x</li>
                   <li>2x vs 2x</li>
                   <li>1x vs 2x</li>
                   <li>2x vs 1x</li>
                 </ul>
-              </Typography>
+          
               <Typography>
                 The following combination
+              </Typography>
                 <ul>
                   <li>1x vs 2x</li>
                   <li>2x vs 1x</li>
@@ -37,7 +39,7 @@ const Rules = () => {
                 <ul>
                   <li>12 vs 12</li>
                 </ul>
-              </Typography>
+           
             </Box>
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
@@ -45,20 +47,22 @@ const Rules = () => {
               <Typography>
                 which combinatiion can you use to get safe or reduce chances of
                 big loss ?
+              </Typography>
                 <ul>
                   <li>1x vs 1x</li>
                   <li>2x vs 2x</li>
                   <li>1x vs 2x</li>
                   <li>2x vs 1x</li>
                 </ul>
-              </Typography>
+        
               <Typography>
                 which combinatiion can kick you out fast if you followed the
                 above?
+              </Typography>
                 <ul>
                   <li>12 vs 12</li>
                 </ul>
-              </Typography>
+            
             </Box>
           </Grid>
         </Grid>
