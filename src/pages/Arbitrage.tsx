@@ -132,7 +132,7 @@ const Arbitrage = () => {
                 <Typography> </Typography>
                 <TextField
                   type="text"
-                  value = { results?.stakes[bet.betId]}
+                  value = { results?.stakes[bet.betId] ?? ''}
 
                   placeholder="total Stake"
                   required
